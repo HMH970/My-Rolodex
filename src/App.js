@@ -27,6 +27,14 @@ class App extends Component {
       );
   }
 
+onSearchChange = (ev) => {
+  const searchField = ev.target.value.toLocaleLowerCase();
+            this.setState(
+              () => {
+                return { searchField }
+              })
+}
+
   render() {
     const filteredMonsters = this.state.monsters.filter((monster) => {
       return monster.name.toLocaleLowerCase().includes(this.state.searchField);
@@ -38,15 +46,7 @@ class App extends Component {
           className="search-box"
           type="search"
           placeholder="search monsters"
-          onChange={(ev) => {
-            const searchField = ev.target.value.toLocaleLowerCase();
-            this.setState(
-              () => {
-                return { searchField }
-              }
-            )
-
-          }}
+          onChange={this.onSearchChange}
         />
 
         {filteredMonsters.map((monster) => {
